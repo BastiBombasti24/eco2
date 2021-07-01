@@ -1,0 +1,29 @@
+# git_ci.yml based on the Tutorial: https://medium.com/flutter-community/flutter-gitlap-ci-cd-dfb7b85672e4
+# https://hub.docker.com/r/cirrusci/flutter
+image: cirrusci/flutter
+
+stages:
+  - build
+  - test
+
+before_script:
+  - cd ./Code
+  - flutter pub get
+  #- flutter clean # Reduces Project Size by deleting build and .dart_tool directories.
+                    # but it also deletes the dart test ...
+
+# " Within the build, the runner builds the project."
+# flutter build to see the build optionshe
+# App Bundle = android official publishing format
+# App bundle: flutter build appbundle
+# Android: flutter build apk
+# iOS: flutter build ios
+# web: flutter build web"
+build:
+  stage: build
+  script:
+    - flutter build appbundle
+  # tags:
+  #  - shared
+  #only:
+  #  - merge_requests
